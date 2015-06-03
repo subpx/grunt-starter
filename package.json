@@ -1,0 +1,13 @@
+{
+  "name": "IconFont",
+  "version": "1.0.0",
+  "description": "",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-csslint": "^0.4.0",
+    "grunt-git-revision": "0.0.1",
+    "grunt-notify": "^0.4.1",
+    "grunt-string-replace": "^1.2.0",
+    "grunt-webfont": "^0.5.3"
+  }
+}
