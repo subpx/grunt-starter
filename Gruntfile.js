@@ -1,16 +1,17 @@
 module.exports = function(grunt) {
 
+	require('time-grunt')(grunt);
+
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
-		
+
 		revision: {
 			options: {
 				property: 'meta.revision',
-				ref: 'HEAD',
-				short: true
+				ref: 'HEAD'
 			}
 		},
-	
+
 		webfont: {
 			icons: {
 				src: 'icons/*.svg',
@@ -27,7 +28,7 @@ module.exports = function(grunt) {
 				}
 			}
 		},
-		
+
 		csslint: {
 			strict: {
 				options: {
@@ -42,22 +43,22 @@ module.exports = function(grunt) {
 				src: ['css/*.css']
 			}
 		},
-		
+
 		notify: {
 			csslint: {
 				options: {
-					title: 'Finished CSS linting',  // optional 
-					message: 'Good work champ. Keep it up!', //required 
+					title: 'Finished CSS linting',  // optional
+					message: 'Good work champ. Keep it up!', //required
 				}
 			},
 			webfont: {
 				options: {
-					title: 'Web fonts',  // optional 
+					title: 'Web fonts',  // optional
 					message: 'We haz made dem.'
 				}
 			}
 		},
-		
+
 		'string-replace': {
 			dist: {
 				files: {
@@ -71,7 +72,7 @@ module.exports = function(grunt) {
 				}
 			}
 		},
-		
+
 		zip: {
 			'long-format': {
 				dest: 'zipped/<%= meta.revision %>.zip',
@@ -79,15 +80,15 @@ module.exports = function(grunt) {
 			}
 		}
 	});
-	
+
 	grunt.loadNpmTasks('grunt-webfont');
 	grunt.loadNpmTasks('grunt-contrib-csslint');
 	grunt.loadNpmTasks('grunt-notify');
 	grunt.loadNpmTasks('grunt-string-replace');
 	grunt.loadNpmTasks('grunt-git-revision');
 	grunt.loadNpmTasks('grunt-zip');
-	
-	grunt.registerTask('default', ['revision', 'webfont','csslint:strict', 'notify', 'string-replace:dist', 'zip:long-format']);
+
+	grunt.registerTask('default', ['revision', 'csslint:strict', 'notify', 'string-replace:dist', 'zip:long-format']);
 
 
 };
