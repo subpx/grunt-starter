@@ -12,6 +12,10 @@ module.exports = function(grunt) {
 			}
 		},
 
+		clean: {
+			release: ['build', 'zipped', 'replaced']
+		},
+
 		webfont: {
 			icons: {
 				src: 'icons/*.svg',
@@ -81,6 +85,7 @@ module.exports = function(grunt) {
 		}
 	});
 
+	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-webfont');
 	grunt.loadNpmTasks('grunt-contrib-csslint');
 	grunt.loadNpmTasks('grunt-notify');
@@ -88,7 +93,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-git-revision');
 	grunt.loadNpmTasks('grunt-zip');
 
-	grunt.registerTask('default', ['revision', 'csslint:strict', 'notify', 'string-replace:dist', 'zip:long-format']);
+	grunt.registerTask('default', ['revision', 'clean:release', 'csslint:strict', 'notify', 'string-replace:dist', 'zip:long-format']);
 
 
 };
