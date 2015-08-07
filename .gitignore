@@ -2,6 +2,7 @@
 build
 replaced
 zipped
+.tmp
 
 # Dependency directory
 node_modules

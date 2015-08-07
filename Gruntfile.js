@@ -12,8 +12,27 @@ module.exports = function(grunt) {
 			}
 		},
 
+		useminPrepare: {
+			html: 'index.html',
+			options: {
+				dest: 'build',
+				root: 'build'
+			}
+		},
+
+		usemin: {
+			html: ['build/index.html']
+		},
+
+		copy:{
+			html: {
+				src: './index.html',
+				dest: 'build/index.html'
+			}
+		},
+
 		clean: {
-			release: ['build', 'zipped', 'replaced']
+			release: ['build/*', 'zipped/*', 'replaced/*']
 		},
 
 		webfont: {
@@ -85,7 +104,13 @@ module.exports = function(grunt) {
 		}
 	});
 
+	grunt.loadNpmTasks('grunt-usemin');
+	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-clean');
+	grunt.loadNpmTasks('grunt-contrib-clean');
+	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-contrib-cssmin');
+	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-webfont');
 	grunt.loadNpmTasks('grunt-contrib-csslint');
 	grunt.loadNpmTasks('grunt-notify');
@@ -93,7 +118,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-git-revision');
 	grunt.loadNpmTasks('grunt-zip');
 
-	grunt.registerTask('default', ['revision', 'clean:release', 'csslint:strict', 'notify', 'string-replace:dist', 'zip:long-format']);
+	grunt.registerTask('default', ['revision', 'clean:release', 'useminPrepare', 'concat:generated', 'uglify:generated', 'cssmin:generated', 'csslint:strict', 'notify', 'string-replace:dist', 'zip:long-format', 'copy:html', 'usemin']);
 
 
 };
